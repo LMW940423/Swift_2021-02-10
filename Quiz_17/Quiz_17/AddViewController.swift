@@ -11,21 +11,24 @@ class AddViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
 
     @IBOutlet weak var txtCellName: UITextField!
     @IBOutlet weak var pickerImage: UIPickerView!
-    
+    @IBOutlet weak var imgView: UIImageView!
     
     let MAX_ARRAY_NUM = 3 // 전체 이미지 개수
     let PICKER_VIEW_COLUMN = 1 // PickerVIew의 컬럼 개수
     var imageFileName = ["cart.png", "clock.png", "pencil.png"]
     var imageArray = [UIImage(named: "cart.png"), UIImage(named: "clock.png"), UIImage(named: "pencil.png")]
+    var checkNum = 0 // row
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-
     }
     
     @IBAction func btnAdd(_ sender: UIButton) {
+        items.append(txtCellName.text!)
+        itemsImageFile.append(imageFileName[checkNum])
+        txtCellName.text = ""
+        navigationController?.popViewController(animated: true)
     }
     /*
     // MARK: - Navigation
@@ -36,11 +39,7 @@ class AddViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         // Pass the selected object to the new view controller.
     }
     */
-    
-    // pickerView에 파일명 배치
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return imageFileName[row]
-    }
+
   
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return PICKER_VIEW_COLUMN
@@ -49,16 +48,17 @@ class AddViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return imageFileName.count
     }
-//
+
 //    // pickerView에 파일명 대신 이미지 배치
-//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-//        let letImageView = UIImageView(image: imageArray[row])
-//        letImageView.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
-//        return letImageView
-//    }
-//
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let letImageView = UIImageView(image: imageArray[row])
+        letImageView.frame = CGRect(x: 0, y: 0, width: 50, height: 20)
+        return letImageView
+    }
+
 //    // pickerVIew로 선택된 파일명의 이미지 출력
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        ImgView.image = UIImage(named: imageFileName[row])
-//    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        imgView.image = UIImage(named: imageFileName[row])
+        checkNum = row
+    }
 }

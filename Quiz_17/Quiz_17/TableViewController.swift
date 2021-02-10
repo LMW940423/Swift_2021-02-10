@@ -7,13 +7,13 @@
 
 import UIKit
 
+// 변수 선언을 class 정의 전에 하여야 한다. (그래야 다른 컨트롤러에서 공유해서 쓸 수 있다.)
+var items = ["책 구매", "철수와 약속", "스터디 준비하기"]
+var itemsImageFile = ["cart.png", "clock.png", "pencil.png"]
+
 class TableViewController: UITableViewController {
     
     @IBOutlet var tvListView: UITableView!
-    
-    // 변수 선언을 class 정의 전에 하여야 한다. (그래야 다른 컨트롤러에서 공유해서 쓸 수 있다.)
-    var items = ["책 구매", "철수와 약속", "스터디 준비하기"]
-    var itemsImageFile = ["cart.png", "clock.png", "pencil.png"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
